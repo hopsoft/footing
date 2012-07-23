@@ -2,8 +2,8 @@ module Footing
   module String
 
     def self.included(mod)
-      mod.send :include, InstanceMethods
       mod.extend ClassMethods
+      mod.send :include, InstanceMethods
     end
 
     module ClassMethods
