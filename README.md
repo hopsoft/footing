@@ -24,7 +24,6 @@ String.ancestors
   Footing::String,
   Comparable,
   Object,
-  PP::ObjectMixin,
   Kernel,
   BasicObject
 ]
@@ -36,7 +35,6 @@ Numeric.ancestors
   Footing::Numeric,
   Comparable,
   Object,
-  PP::ObjectMixin,
   Kernel,
   BasicObject
 ]
