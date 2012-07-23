@@ -65,4 +65,4 @@ Footing.patch_all!
 * `cd /path/to/footing`
 * `bundle`
 * `./console`
-* `Footing.patch String, Footing::String`
+* `Footing.patch! String, Footing::String`
