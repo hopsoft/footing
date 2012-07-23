@@ -11,7 +11,27 @@ This lib extends native objects with additional functionality.
 ```ruby
 # some examples of explicit patching
 Hopsoft.patch(String)
+String.ancestors
+[
+  String,
+  Hopsoft::String::InstanceMethods,
+  Comparable,
+  Object,
+  PP::ObjectMixin,
+  Kernel,
+  BasicObject
+]
+
 Hopsoft.patch(Numeric)
+[
+  Numeric,
+  Hopsoft::Numeric::InstanceMethods,
+  Comparable,
+  Object,
+  PP::ObjectMixin,
+  Kernel,
+  BasicObject
+]
 ```
 
 ## Instance patching
