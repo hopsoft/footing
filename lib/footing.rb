@@ -1,7 +1,7 @@
 module Footing
 
-  # Applies all Footing patches to core Classes.
-  def self.patch_core!
+  # Applies all Footing patches.
+  def self.patch_all!
     list = [
       "Kernel",
       "Object",

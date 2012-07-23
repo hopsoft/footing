@@ -51,6 +51,14 @@ s.respond_to? :escape # => true
 "foo".respond_to? :escape # => false
 ```
 
+## Shotgun patching
+
+For the lazy and brave, you can also patch everything at once.
+
+```ruby
+Footing.patch_all!
+```
+
 ## Kick the tires
 
 * `git clone git://github.com/hopsoft/footing.git`
