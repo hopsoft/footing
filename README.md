@@ -22,7 +22,6 @@ If you don't want to corrupt your entire runtime, you can choose to patch an ins
 s = "foo"
 Hopsoft.patch(s)
 s.respond_to? :escape # => true
-
 "foo".respond_to? :escape # => false
 ```
 
