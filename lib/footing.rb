@@ -6,7 +6,8 @@ module Footing
       "Kernel",
       "Object",
       "String",
-      "Numeric"
+      "Numeric",
+      "Hash"
     ]
 
     list.each do |name|
