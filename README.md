@@ -1,4 +1,4 @@
-# Hopsoft utility lib
+# Hopsoft
 
 #### NOTE: this lib is experimental at the moment
 
