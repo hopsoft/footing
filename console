@@ -2,8 +2,8 @@
 require "pry"
 
 def reload
-  ENV["HOPSOFT_DEV"] = "true"
-  path = File.expand_path(File.join(File.dirname(__FILE__), 'lib', 'hopsoft.rb'))
+  ENV["FOOTING_DEV"] = "true"
+  path = File.expand_path(File.join(File.dirname(__FILE__), 'lib', 'footing.rb'))
   load path
 end
 

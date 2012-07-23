@@ -1,4 +1,4 @@
-module Hopsoft
+module Footing
   module Kernel
 
   end

@@ -1,4 +1,4 @@
-# Hopsoft
+# Footing
 
 #### NOTE: this lib is experimental at the moment
 
@@ -6,15 +6,15 @@ This lib extends native objects with additional functionality.
 
 ## No implicit monkey patching
 
-**No surprises here.** You must explicitly ask for Hopsoft goodness to be added to your objects.
+**No surprises here.** You must explicitly ask for Footing goodness to be added to your objects.
 
 ```ruby
 # some examples of explicit patching
-Hopsoft.patch!(String)
+Footing.patch!(String)
 String.ancestors
 [
   String,
-  Hopsoft::String::InstanceMethods,
+  Footing::String::InstanceMethods,
   Comparable,
   Object,
   PP::ObjectMixin,
@@ -22,10 +22,10 @@ String.ancestors
   BasicObject
 ]
 
-Hopsoft.patch!(Numeric)
+Footing.patch!(Numeric)
 [
   Numeric,
-  Hopsoft::Numeric::InstanceMethods,
+  Footing::Numeric::InstanceMethods,
   Comparable,
   Object,
   PP::ObjectMixin,
@@ -40,15 +40,15 @@ If you don't want to corrupt your entire runtime, you can patch an instance.
 
 ```ruby
 s = "foo"
-Hopsoft.patch!(s)
+Footing.patch!(s)
 s.respond_to? :escape # => true
 "foo".respond_to? :escape # => false
 ```
 
 ## Kick the tires
 
-* `git clone git://github.com/hopsoft/hopsoft.git`
-* `cd /path/to/hopsoft`
+* `git clone git://github.com/hopsoft/footing.git`
+* `cd /path/to/footing`
 * `bundle`
 * `./console`
-* `Hopsoft.patch(String)`
+* `Footing.patch(String)`
