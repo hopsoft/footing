@@ -3,7 +3,6 @@
 #### NOTE: this lib is experimental at the moment
 
 Footing provides some sanity for monkey patching practices.
-
 It's also a utility lib that contains additional functionality for core objects that you might find useful.
 
 ## No implicit monkey patching
