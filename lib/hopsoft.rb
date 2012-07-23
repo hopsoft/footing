@@ -3,7 +3,7 @@ module Hopsoft
   # Patches the object with all applicable Hopsoft extensions and monkey patches.
   # Works for Modules, Classes, and instances of objects.
   # @param [Object] obj The object to patch.
-  def self.patch(obj)
+  def self.patch!(obj)
     if obj.class == Module || obj.class == Class
       # patching a Module or Class
       violate(obj)

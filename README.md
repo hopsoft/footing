@@ -10,7 +10,7 @@ This lib extends native objects with additional functionality.
 
 ```ruby
 # some examples of explicit patching
-Hopsoft.patch(String)
+Hopsoft.patch!(String)
 String.ancestors
 [
   String,
@@ -22,7 +22,7 @@ String.ancestors
   BasicObject
 ]
 
-Hopsoft.patch(Numeric)
+Hopsoft.patch!(Numeric)
 [
   Numeric,
   Hopsoft::Numeric::InstanceMethods,
@@ -40,7 +40,7 @@ If you don't want to corrupt your entire runtime, you can patch an instance.
 
 ```ruby
 s = "foo"
-Hopsoft.patch(s)
+Hopsoft.patch!(s)
 s.respond_to? :escape # => true
 "foo".respond_to? :escape # => false
 ```
