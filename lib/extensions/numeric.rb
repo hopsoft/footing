@@ -1,6 +1,10 @@
 module Footing
   module Numeric
 
+    def self.included(mod)
+      mod.send :include, InstanceMethods
+    end
+
     module InstanceMethods
 
       # Returns the percentage that this number is of the passed number.

@@ -10,11 +10,18 @@ This lib extends native objects with additional functionality.
 
 ```ruby
 # some examples of explicit patching
-Footing.patch!(String)
+Footing.patch! String, Footing::String
+Footing.patch! Numeric, Footing::Numeric
+```
+
+Introspect the changes.
+
+```ruby
 String.ancestors
 [
   String,
   Footing::String::InstanceMethods,
+  Footing::String,
   Comparable,
   Object,
   PP::ObjectMixin,
@@ -22,10 +29,11 @@ String.ancestors
   BasicObject
 ]
 
-Footing.patch!(Numeric)
+Numeric.ancestors
 [
   Numeric,
   Footing::Numeric::InstanceMethods,
+  Footing::Numeric,
   Comparable,
   Object,
   PP::ObjectMixin,
@@ -40,7 +48,7 @@ If you don't want to corrupt your entire runtime, you can patch an instance.
 
 ```ruby
 s = "foo"
-Footing.patch!(s)
+Footing.patch! s, Footing::String
 s.respond_to? :escape # => true
 "foo".respond_to? :escape # => false
 ```
@@ -51,4 +59,4 @@ s.respond_to? :escape # => true
 * `cd /path/to/footing`
 * `bundle`
 * `./console`
-* `Footing.patch(String)`
+* `Footing.patch String, Footing::String`

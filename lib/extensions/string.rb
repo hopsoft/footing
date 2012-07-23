@@ -1,5 +1,10 @@
 module Footing
   module String
+
+    def self.included(mod)
+      mod.send :include, InstanceMethods
+    end
+
     module InstanceMethods
 
       # Escapes a series of chars in the current string.

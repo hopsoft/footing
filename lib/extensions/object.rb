@@ -1,5 +1,10 @@
 module Footing
   module Object
+
+    def self.included(mod)
+      mod.send :include, InstanceMethods
+    end
+
     module InstanceMethods
 
       # Returns the eigen class for the object.
