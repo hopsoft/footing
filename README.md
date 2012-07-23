@@ -15,9 +15,8 @@ Footing.patch! String, Footing::String
 Footing.patch! Numeric, Footing::Numeric
 ```
 
-Introspect the changes.
-
 ```ruby
+# instrospect the changes
 String.ancestors
 [
   String,
