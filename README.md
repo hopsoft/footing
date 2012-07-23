@@ -16,7 +16,7 @@ Hopsoft.patch(Numeric)
 
 ## Instance patching
 
-If you don't want to corrupt your entire runtime, you can choose to patch an instance.
+If you don't want to corrupt your entire runtime, you can patch an instance.
 
 ```ruby
 s = "foo"
