@@ -2,11 +2,13 @@
 
 #### NOTE: this lib is experimental at the moment
 
-This lib extends native objects with additional functionality.
+Footing provides some sanity for monkey patching practices.
+
+It's also a utility lib that contains additional functionality for core objects that you might find useful.
 
 ## No implicit monkey patching
 
-**No surprises here.** You must explicitly ask for Footing goodness to be added to your objects.
+**No surprises here.** You must explicitly patch.
 
 ```ruby
 # some examples of explicit patching
