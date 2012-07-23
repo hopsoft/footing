@@ -3,6 +3,18 @@ module Footing
 
     def self.included(mod)
       mod.send :include, InstanceMethods
+      mod.extend ClassMethods
+    end
+
+    module ClassMethods
+
+      ## Generates a random string (upcase alpha-numeric)
+      ## Returns a string with the length provided, defaulting to 12 chars
+      def random(length=12)
+        chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        (0...length).map { chars.split('')[rand(chars.length)] }.join
+      end
+
     end
 
     module InstanceMethods
