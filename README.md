@@ -42,7 +42,7 @@ Numeric.ancestors
 
 ## Instance patching
 
-If you don't want to corrupt your entire runtime, you can patch an instance.
+If you don't want to corrupt the entire runtime, you can patch an instance.
 
 ```ruby
 s = "foo"
