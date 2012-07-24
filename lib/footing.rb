@@ -35,6 +35,28 @@ module Footing
     context.send :include, extension
   end
 
+  # Creates class methods for all InstanceMethods in the module.
+  # This allows users to invoke utility methods rather than monkey patching if they so desire.
+  # @param [Module] mod The Module to setup util methods for.
+  def self.util!(mod)
+    proxy = ::Object.new
+    proxy_eigen = class << proxy
+      self
+    end
+
+    Footing.patch! proxy, mod
+
+    eigen = class << mod
+      self
+    end
+
+    mod.const_get("InstanceMethods").instance_methods(false).each do |method|
+      eigen.send :define_method, method do |value, *args|
+        proxy_eigen.instance_method(method).bind(value).call(*args)
+      end
+    end
+  end
+
 end
 
 Dir[File.expand_path(File.join(File.dirname(__FILE__), "**/*.rb"))].each do |file|

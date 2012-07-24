@@ -59,6 +59,15 @@ For the lazy and brave, you can also patch everything at once.
 Footing.patch_all!
 ```
 
+## Patch free
+
+Dont like monkey patches? Run patch free by setting up utility methods.
+
+```ruby
+Footing.util! Footing::String
+Footing::String.escape "foo", "o" # => "f\\o\\o"
+```
+
 ## Kick the tires
 
 * `git clone git://github.com/hopsoft/footing.git`

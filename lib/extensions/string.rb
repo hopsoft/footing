@@ -28,5 +28,6 @@ module Footing
       end
 
     end
+
   end
 end
