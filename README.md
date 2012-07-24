@@ -70,8 +70,16 @@ Footing::String.escape "foo", "o" # => "f\\o\\o"
 
 ## Kick the tires
 
-* `git clone git://github.com/hopsoft/footing.git`
-* `cd /path/to/footing`
-* `bundle`
-* `./console`
-* `Footing.patch! String, Footing::String`
+1. `git clone git://github.com/hopsoft/footing.git`
+1. `cd /path/to/footing`
+1. `bundle`
+1. `./console`
+1. `Footing.patch! String, Footing::String`
+
+or
+
+1. `gem install footing`
+1. `irb`
+1. `require 'rubygems'`
+1. `require 'footing'`
+1. `Footing.patch! String, Footing::String`
