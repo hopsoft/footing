@@ -61,7 +61,7 @@ Footing.patch_all!
 
 ## Patch free
 
-Dont like monkey patches? Run patch free by setting up utility methods.
+Dont like monkey patches? Run patch free by setting up utility methods instead.
 
 ```ruby
 Footing.util! Footing::String
