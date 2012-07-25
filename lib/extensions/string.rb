@@ -27,6 +27,24 @@ module Footing
         end
       end
 
+      # Converts a word with underscores into a sentance with a capitalized first word.
+      def humanize
+        ret = []
+        self.split('_').each_with_index do |w, idx|
+          if idx == 0
+            ret << w.capitalize
+          else
+            ret << w
+          end
+        end
+        ret.join(' ')
+      end
+
+      # Similar to humanize but it capitalizes each word
+      def titleize
+        self.split('_').map(&:capitalize).join(' ')
+      end
+
     end
 
   end
