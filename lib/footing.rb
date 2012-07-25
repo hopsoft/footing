@@ -1,16 +1,18 @@
 module Footing
 
-  # Applies all Footing patches.
-  def self.patch_all!
-    list = [
+  def self.modules
+    [
       "Kernel",
       "Object",
       "String",
       "Numeric",
       "Hash"
     ]
+  end
 
-    list.each do |name|
+  # Applies all Footing patches.
+  def self.patch_all!
+    modules.each do |name|
       context = Object.const_get(name)
       footing = Footing.const_get(name)
       patch! context, footing
@@ -33,6 +35,11 @@ module Footing
 
     raise "#{obj.class.name} doesn't support patching!" unless context
     context.send :include, extension
+  end
+
+  # Creates util methods for all Footing patches.
+  def self.util_all!
+    modules.each { |mod| util! Footing.const_get(mod) }
   end
 
   # Creates class methods for all InstanceMethods in the module.
