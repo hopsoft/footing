@@ -10,9 +10,9 @@ module Footing
 
       ## Generates a random string (upcase alpha-numeric)
       ## Returns a string with the length provided, defaulting to 12 chars
-      def random(length=12)
-        chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-        (0...length).map { chars.split('')[rand(chars.length)] }.join
+      def random_key(length=12)
+        chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"
+        chars.split('').sample(length).join
       end
 
     end
@@ -29,15 +29,7 @@ module Footing
 
       # Converts a word with underscores into a sentance with a capitalized first word.
       def humanize
-        ret = []
-        self.split('_').each_with_index do |w, idx|
-          if idx == 0
-            ret << w.capitalize
-          else
-            ret << w
-          end
-        end
-        ret.join(' ')
+        self.downcase.gsub(/_/, " ").capitalize
       end
 
       # Similar to humanize but it capitalizes each word
