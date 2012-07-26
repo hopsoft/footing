@@ -73,6 +73,7 @@ Footing::String.escape "foo", "o" # => "f\\o\\o"
 1. `git clone git://github.com/hopsoft/footing.git`
 1. `cd /path/to/footing`
 1. `bundle`
+1. `./test`
 1. `./console`
 1. `Footing.patch! String, Footing::String`
 
