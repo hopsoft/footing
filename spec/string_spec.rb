@@ -28,6 +28,16 @@ describe Footing::String do
     assert { (key =~ /[a-z]/).nil? } # no lowercase chars
   end
 
+  it "can generate a random_key with rejected chars" do
+    Footing.util! Footing::String
+    skipped_chars = [ 0, 1, 'I', 'O' ]
+    key = Footing::String.random_key(100, skipped_chars)
+    assert { key.length == 100 }      # expected length
+    assert { (key =~ /\W/).nil? }     # no non-word chars
+    assert { (key =~ /[a-z]/).nil? }  # no lowercase chars
+    assert { (key =~ /[01IO]/).nil? } # skipped rejected chars
+  end
+
   it "can escape properly" do
     s = "foobar"
     Footing.patch! s, Footing::String

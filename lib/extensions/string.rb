@@ -3,8 +3,9 @@ module Footing
 
     ## Generates a random string (upcase alpha-numeric)
     ## Returns a string with the length provided, defaulting to 12 chars
-    def random_key(length=12)
+    def random_key(length=12, rejected_chars=[])
       @chars ||= [(0..9).to_a, ('A'..'Z').to_a].flatten
+      rejected_chars.map{ |c| @chars.delete(c) }
       (1..length).map{ |i| @chars.sample }.join
     end
 
