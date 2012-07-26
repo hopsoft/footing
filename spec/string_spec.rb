@@ -13,7 +13,7 @@ describe Footing::String do
 
   it "can setup util methods" do
     Footing.util! Footing::String
-    assert { Footing::String.respond_to? :random_key }
+    assert { Footing::String.respond_to? :random }
     assert { Footing::String.respond_to? :escape }
     assert { Footing::String.respond_to? :humanize }
     assert { Footing::String.respond_to? :titleize }
@@ -22,14 +22,14 @@ describe Footing::String do
 
   it "can generate a random_key" do
     Footing.util! Footing::String
-    key = Footing::String.random_key(100)
+    key = Footing::String.random(100)
     assert { key.length == 100 }     # expected length
     assert { (key =~ /\W/).nil? }    # no non-word chars
   end
 
   it "can generate a random_key with rejected chars" do
     Footing.util! Footing::String
-    key = Footing::String.random_key(100, :upcase => true, :reject => [0, 1, 'I', 'O'])
+    key = Footing::String.random(100, :upcase => true, :reject => [0, 1, 'I', 'O'])
     assert { key.length == 100 }      # expected length
     assert { (key =~ /\W/).nil? }     # no non-word chars
     assert { (key =~ /[a-z]/).nil? }  # no lowercase chars
