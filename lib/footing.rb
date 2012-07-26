@@ -59,7 +59,13 @@ module Footing
 
     mod.instance_methods(false).each do |method|
       eigen.send :define_method, method do |*args|
-        proxy_eigen.instance_method(method).bind(args.first || proxy).call(*args)
+        o = args.first || proxy
+        m = proxy_eigen.instance_method(method)
+        if m.parameters.empty?
+          m.bind(o).call
+        else
+          m.bind(o).call(*args)
+        end
       end
     end
   end

@@ -25,13 +25,11 @@ describe Footing::String do
     key = Footing::String.random_key(100)
     assert { key.length == 100 }     # expected length
     assert { (key =~ /\W/).nil? }    # no non-word chars
-    assert { (key =~ /[a-z]/).nil? } # no lowercase chars
   end
 
   it "can generate a random_key with rejected chars" do
     Footing.util! Footing::String
-    skipped_chars = [ 0, 1, 'I', 'O' ]
-    key = Footing::String.random_key(100, skipped_chars)
+    key = Footing::String.random_key(100, :upcase => true, :reject => [0, 1, 'I', 'O'])
     assert { key.length == 100 }      # expected length
     assert { (key =~ /\W/).nil? }     # no non-word chars
     assert { (key =~ /[a-z]/).nil? }  # no lowercase chars
