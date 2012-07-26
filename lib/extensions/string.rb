@@ -5,7 +5,7 @@ module Footing
     ## Returns a string with the length provided, defaulting to 12 chars
     def random_key(length=12)
       @chars ||= [(0..9).to_a, ('A'..'Z').to_a].flatten
-      (0..length).map{ |i| @chars.sample }.join
+      (1..length).map{ |i| @chars.sample }.join
     end
 
     # Escapes a series of chars in the current string.

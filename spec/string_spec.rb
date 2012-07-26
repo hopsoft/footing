@@ -20,4 +20,30 @@ describe Footing::String do
     assert { Footing::String.respond_to? :titlecase }
   end
 
+  it "can generate a random_key" do
+    Footing.util! Footing::String
+    key = Footing::String.random_key(100)
+    assert { key.length == 100 }     # expected length
+    assert { (key =~ /\W/).nil? }    # no non-word chars
+    assert { (key =~ /[a-z]/).nil? } # no lowercase chars
+  end
+
+  it "can escape properly" do
+    s = "foobar"
+    Footing.patch! s, Footing::String
+    assert { s.escape("b") == "foo\\bar" }
+  end
+
+  it "can titleize" do
+    s = "foobar test"
+    Footing.patch! s, Footing::String
+    assert { s.titleize == "Foobar test" }
+  end
+
+  it "can humanize" do
+    s = "foo_bar"
+    Footing.patch! s, Footing::String
+    assert { s.humanize == "Foo bar" }
+  end
+
 end
