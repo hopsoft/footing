@@ -42,7 +42,7 @@ module Footing
     modules.each { |mod| util! Footing.const_get(mod) }
   end
 
-  # Creates class methods for all InstanceMethods in the module.
+  # Creates class methods for all instance methods in the module.
   # This allows users to invoke utility methods rather than monkey patching if they so desire.
   # @param [Module] mod The Module to setup util methods for.
   def self.util!(mod)
@@ -57,9 +57,9 @@ module Footing
       self
     end
 
-    mod.const_get("InstanceMethods").instance_methods(false).each do |method|
-      eigen.send :define_method, method do |value, *args|
-        proxy_eigen.instance_method(method).bind(value).call(*args)
+    mod.instance_methods(false).each do |method|
+      eigen.send :define_method, method do |*args|
+        proxy_eigen.instance_method(method).bind(args.first || proxy).call(*args)
       end
     end
   end
