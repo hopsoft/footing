@@ -21,7 +21,6 @@ module Footing
       opts[:reject] = opts[:reject].map { |c| c.to_s }
       (1..length).map{ |i| (chars - opts[:reject]).sample }.join
     end
-    alias :random_key :random
 
     # Escapes a series of chars in the current string.
     # NOTE: A new string is returned.
