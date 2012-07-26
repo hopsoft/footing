@@ -12,7 +12,7 @@ module Footing
     # @option opts [Array] :reject A list of characters to omit from the key.
     # @option opts [Boolean] :upcase Indicates that only use uppercase characters should be used.
     # @return [String]
-    def random_key(length=12, opts={})
+    def random(length=12, opts={})
       @chars ||= [(0..9).to_a, ('a'..'z').to_a, ('A'..'Z').to_a].flatten.map { |c| c.to_s }
       chars = @chars.reject do |c|
         c =~ /[a-z]/ if opts[:upcase]
@@ -21,6 +21,7 @@ module Footing
       opts[:reject] = opts[:reject].map { |c| c.to_s }
       (1..length).map{ |i| (chars - opts[:reject]).sample }.join
     end
+    alias :random_key :random
 
     # Escapes a series of chars in the current string.
     # NOTE: A new string is returned.
