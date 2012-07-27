@@ -1,4 +1,5 @@
 require File.join(File.dirname(__FILE__), "spec_helper")
+include GrumpyOldMan
 
 describe Footing do
 
@@ -13,8 +14,8 @@ describe Footing do
 
     Footing.patch! Foo, FooClassPatch
     o = Foo.new
-    assert { o.respond_to? :foo }
-    assert { o.foo == :foo }
+    assert o.respond_to? :foo
+    assert_equal o.foo, :foo
   end
 
   it "should patch an instance" do
@@ -26,8 +27,8 @@ describe Footing do
 
     o = Object.new
     Footing.patch! o, FooInstancePatch
-    assert { o.respond_to? :foo }
-    assert { o.foo == :foo }
+    assert o.respond_to? :foo
+    assert_equal o.foo, :foo
   end
 
   it "should setup util methods" do
@@ -38,8 +39,8 @@ describe Footing do
     end
 
     Footing.util! FooUtil
-    assert { FooUtil.respond_to? :foo }
-    assert { FooUtil.foo("bar") == "foobar" }
+    assert FooUtil.respond_to? :foo
+    assert_equal FooUtil.foo("bar"), "foobar"
   end
 
 end
