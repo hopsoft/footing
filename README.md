@@ -20,7 +20,6 @@ Footing.patch! Numeric, Footing::Numeric
 String.ancestors
 [
   String,
-  Footing::String::InstanceMethods,
   Footing::String,
   Comparable,
   Object,
@@ -31,7 +30,6 @@ String.ancestors
 Numeric.ancestors
 [
   Numeric,
-  Footing::Numeric::InstanceMethods,
   Footing::Numeric,
   Comparable,
   Object,
