@@ -1,5 +1,11 @@
 # Extend Rails with this module to add a uuid method in your migrations.
-# Footing.patch! ActiveRecord::ConnectionAdapters::PostgreSQLAdapter::TableDefinition, Footing::PGTableDefinition
+#
+# Example:
+#   # rails_root/config/application.rb
+#   config.after_initialize do
+#     Footing.patch! ActiveRecord::ConnectionAdapters::PostgreSQLAdapter::TableDefinition, Footing::PGTableDefinition
+#   end
+#
 module Footing
   module PGTableDefinition
 

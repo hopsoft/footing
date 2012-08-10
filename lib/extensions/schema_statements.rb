@@ -1,5 +1,11 @@
 # Extend Rails to support adding timestamp indexes for created_at & updated_at using day granularity.
-# Footing.patch! ActiveRecord::ConnectionAdapters::AbstractAdapter, Footing::PGSchemaStatements
+#
+# Example:
+#   # rails_root/config/application.rb
+#   config.after_initialize do
+#     Footing.patch! ActiveRecord::ConnectionAdapters::AbstractAdapter, Footing::PGSchemaStatements
+#   end
+#
 module Footing
   module PGSchemaStatements
 
