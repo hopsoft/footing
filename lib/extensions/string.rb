@@ -41,5 +41,53 @@ module Footing
     end
     alias :titlecase :titleize
 
+    # Compare two strings and return floating point precision metric. Will work
+    #   with any string, including urls.
+    # @param [String] string1 First string. The baseline string that will
+    #   compared against.
+    # @param [String] string2 Second string. The comparison string that will be
+    #   matched against the baseline.
+    # @return [Float]
+    # @note: Final score will not be effected by switching the baseline and the
+    #   comparison strings.
+    # @example
+        #entropy "this", ""
+        # => 0.0
+        #entropy "this", "  "
+        # => 0.0
+        #entropy "this", "t"
+        # => 0.0
+        #entropy "this", "th"
+        # => 0.5
+        #entropy "this", "thi"
+        # => 0.8
+        #entropy "this", "this"
+        # => 1.0
+    def self.entropy(string1, string2)
+      string1.downcase!
+      string2.downcase!
+      #Build a range for the string length-2,collect every 2nd group of chars,reject anything " "
+      pairs1 = (0..string1.length-2).collect {|i| string1[i,2]}.reject {|pair1| pair1.include? " "}
+      pairs2 = (0..string2.length-2).collect {|n| string2[n,2]}.reject {|pair2| pair2.include? " "}
+      #Sum all elements
+      union = pairs1.size + pairs2.size
+      #Set a value to zero
+      intersection = 0
+      #Iterate over first subset of elements
+      pairs1.each do |p_one|
+        #Count iteration over the rest of the subset of elements (optional: pairs2.size-1 or pairs2.size. TODO: see where this matters)
+        0.upto(pairs2.size-1) do |i|
+          if p_one == pairs2[i]
+            #Increment number of similar grouped characters
+            intersection += 1
+            pairs2.slice!(i)
+            #Break in case we get into some strange loop. This is not necessary but its a nice safeguard.
+            break
+          end
+        end
+      end
+      (2.0 * intersection) / union
+    end
+
   end
 end
