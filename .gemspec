@@ -2,13 +2,12 @@ require 'rake'
 
 Gem::Specification.new do |spec|
   spec.name = 'footing'
-  spec.version = '0.0.7'
+  spec.version = '0.0.8'
   spec.license = 'MIT'
   spec.homepage = 'https://github.com/hopsoft/footing'
-  spec.summary = 'Foundational patching lib.'
+  spec.summary = 'A utility belt library.'
   spec.description = <<-DESC
-    Footing provides some sanity for monkey patching practices.
-    It's also a utility lib that contains additional functionality for core objects that you might find useful.
+    Footing is a utillity belt library that employs sane monkey patching.
   DESC
 
   spec.authors = ['Nathan Hopkins']
