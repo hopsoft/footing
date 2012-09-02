@@ -44,7 +44,8 @@ module Footing
     #   dict.adjust_values! { |v| v.to_s }
     #   dict # => {:a => "1", :b => "2", :c => "3"}
     #
-    # @yield [value] Yields the current value to the block. The result of the block is then assigned to the corresponding key.
+    # @yield [value] Yields the current value to the block.
+    #                The result of the block is then assigned to the corresponding key.
     def adjust_values!
       each { |k, v| self[k] = yield(v) }
     end
