@@ -37,5 +37,15 @@ module Footing
       end
     end
 
+    # Ammends the values of the Hash in place.
+    #
+    # @example
+    #   dict = {:a => 1, :b => 2, :c => 3}
+    #   dict.adjust_values! { |v| v.to_s }
+    #   dict # => {:a => "1", :b => "2", :c => "3"}
+    def adjust_values!
+      each { |k, v| self[k] = yield(v) }
+    end
+
   end
 end
