@@ -26,5 +26,12 @@ describe Footing::Hash do
     assert_equal 1000.percent_of(1000), 100
   end
 
+  it "should support round_to" do
+    assert_equal 1.0009.round_to(2), 1
+    assert_equal 1.066.round_to(2), 1.07
+    assert_equal 1.867.round_to(2), 1.87
+    assert_equal 1.789259.round_to(5), 1.78926
+  end
+
 end
 
