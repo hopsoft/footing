@@ -3,14 +3,12 @@ module Footing
 
     # Returns a positive representation of the number.
     def positive
-      return self if self >= 0
-      flip_sign
+      abs
     end
 
     # Returns a negative representation of the number.
     def negative
-      return self if self < 0
-      flip_sign
+      abs.flip_sign
     end
 
     # Flips the sign on the number making it either either positive or negative.

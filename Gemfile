@@ -7,4 +7,5 @@ end
 
 group :test do
   gem "rspec"
+  gem "grumpy_old_man"
 end
