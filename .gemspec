@@ -2,7 +2,7 @@ require 'rake'
 
 Gem::Specification.new do |spec|
   spec.name = 'footing'
-  spec.version = '0.1.0'
+  spec.version = '0.1.1'
   spec.license = 'MIT'
   spec.homepage = 'https://github.com/hopsoft/footing'
   spec.summary = 'A utility belt library.'
