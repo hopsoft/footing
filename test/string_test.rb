@@ -1,9 +1,9 @@
-require File.join(File.dirname(__FILE__), "spec_helper")
-include GrumpyOldMan
+require File.join(File.dirname(__FILE__), "test_helper")
 
-describe Footing::String do
+class StringTest < MicroTest::Test
+  Footing.util! Footing::String
 
-  it "can patch a string instance" do
+  test "patch a string instance" do
     s = ""
     Footing.patch! s, Footing::String
     assert s.respond_to? :escape
@@ -12,8 +12,7 @@ describe Footing::String do
     assert s.respond_to? :titlecase
   end
 
-  it "can setup util methods" do
-    Footing.util! Footing::String
+  test ".util!" do
     assert Footing::String.respond_to? :random
     assert Footing::String.respond_to? :escape
     assert Footing::String.respond_to? :humanize
@@ -21,38 +20,36 @@ describe Footing::String do
     assert Footing::String.respond_to? :titlecase
   end
 
-  it "can generate a random_key" do
-    Footing.util! Footing::String
+  test ".random" do
     key = Footing::String.random(100)
-    assert_equal key.length, 100 # expected length
+    assert key.length == 100 # expected length
     assert (key =~ /\W/).nil?    # no non-word chars
   end
 
-  it "can generate a random_key with rejected chars" do
-    Footing.util! Footing::String
+  test ".random with rejected chars" do
     key = Footing::String.random(100, :upcase => true, :reject => [0, 1, 'I', 'O'])
-    assert_equal key.length, 100  # expected length
+    assert key.length == 100  # expected length
     assert (key =~ /\W/).nil?     # no non-word chars
     assert (key =~ /[a-z]/).nil?  # no lowercase chars
     assert (key =~ /[01IO]/).nil? # skipped rejected chars
   end
 
-  it "can escape properly" do
+  test ".escape" do
     s = "foobar"
     Footing.patch! s, Footing::String
-    assert_equal s.escape("b"), "foo\\bar"
+    assert s.escape("b") == "foo\\bar"
   end
 
-  it "can titleize" do
+  test ".titleize" do
     s = "foobar test"
     Footing.patch! s, Footing::String
-    assert_equal s.titleize, "Foobar test"
+    assert s.titleize == "Foobar test"
   end
 
-  it "can humanize" do
+  test ".humanize" do
     s = "foo_bar"
     Footing.patch! s, Footing::String
-    assert_equal s.humanize, "Foo bar"
+    assert s.humanize == "Foo bar"
   end
 
 end

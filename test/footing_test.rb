@@ -1,11 +1,9 @@
-require File.join(File.dirname(__FILE__), "spec_helper")
-include GrumpyOldMan
+require File.join(File.dirname(__FILE__), "test_helper")
 
-describe Footing do
+class FootingTest < MicroTest::Test
 
-  it "should patch a class" do
-    class Foo
-    end
+  test "patch a class" do
+    class Foo; end
     module FooClassPatch
       def foo
         :foo
@@ -15,10 +13,10 @@ describe Footing do
     Footing.patch! Foo, FooClassPatch
     o = Foo.new
     assert o.respond_to? :foo
-    assert_equal o.foo, :foo
+    assert o.foo == :foo
   end
 
-  it "should patch an instance" do
+  test "patch an instance" do
     module FooInstancePatch
       def foo
         :foo
@@ -28,10 +26,10 @@ describe Footing do
     o = Object.new
     Footing.patch! o, FooInstancePatch
     assert o.respond_to? :foo
-    assert_equal o.foo, :foo
+    assert o.foo == :foo
   end
 
-  it "should setup util methods" do
+  test "setup util methods" do
     module FooUtil
       def foo(arg)
         "foo#{arg}"
@@ -40,7 +38,7 @@ describe Footing do
 
     Footing.util! FooUtil
     assert FooUtil.respond_to? :foo
-    assert_equal FooUtil.foo("bar"), "foobar"
+    assert FooUtil.foo("bar") == "foobar"
   end
 
 end

@@ -1,3 +1,5 @@
+require File.join(File.dirname(__FILE__), "footing", "version")
+
 module Footing
 
   def self.modules
