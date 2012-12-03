@@ -41,5 +41,15 @@ module Footing
     end
     alias :titlecase :titleize
 
+    # Indicates if this string represents a number.
+    def numeric?
+      !!(self =~ /\A[0-9]+\.*[0-9]*\z/)
+    end
+
+    # Indicates if this string represents a boolean value.
+    def boolean?
+      !!(self =~ /\A(true|false)\z/i)
+    end
+
   end
 end

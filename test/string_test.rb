@@ -52,4 +52,44 @@ class StringTest < MicroTest::Test
     assert s.humanize == "Foo bar"
   end
 
+  test ".numeric? integers" do
+    (0..100).each do |i|
+      s = i.to_s
+      Footing.patch! s, Footing::String
+      assert s.numeric?
+    end
+  end
+
+  test ".numeric? floats" do
+    (0..100).each do |i|
+      s = i.to_f.to_s
+      Footing.patch! s, Footing::String
+      assert s.numeric?
+    end
+    s = "7843.7897389"
+    Footing.patch! s, Footing::String
+    assert s.numeric?
+    s = "7843.789.7389"
+    Footing.patch! s, Footing::String
+    assert !s.numeric?
+  end
+
+  test ".boolean?" do
+    s = "true"
+    Footing.patch! s, Footing::String
+    assert s.boolean?
+
+    s = "false"
+    Footing.patch! s, Footing::String
+    assert s.boolean?
+
+    s = " true"
+    Footing.patch! s, Footing::String
+    assert !s.boolean?
+
+    s = "false "
+    Footing.patch! s, Footing::String
+    assert !s.boolean?
+  end
+
 end
