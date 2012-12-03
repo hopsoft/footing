@@ -50,5 +50,18 @@ module Footing
       each { |k, v| self[k] = yield(v) }
     end
 
+    # Recursively casts all string values in this Hash.
+    # See Footing::String#cast
+    def cast_values!
+      each do |key, value|
+        if value.respond_to?(:cast_values!)
+          value.cast_values!
+        elsif value.respond_to?(:cast)
+          self[key] = value.cast
+        end
+      end
+      self
+    end
+
   end
 end

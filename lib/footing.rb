@@ -8,6 +8,7 @@ module Footing
       "Object",
       "String",
       "Numeric",
+      "Array",
       "Hash"
     ]
   end
