@@ -3,7 +3,7 @@ require File.join(File.dirname(__FILE__), "lib", "footing", "version")
 
 Gem::Specification.new do |spec|
   spec.name = 'footing'
-  spec.version = '0.1.1'
+  spec.version = Footing::VERSION
   spec.license = 'MIT'
   spec.homepage = 'https://github.com/hopsoft/footing'
   spec.summary = 'A utility belt lib.'
@@ -17,6 +17,8 @@ Gem::Specification.new do |spec|
   spec.files = FileList[
     'lib/**/*.rb',
     '[A-Z]*',
-    'test/**/*.rb'
+    'test/**/*.rb',
+    'LICENSE.txt',
+    'README.md'
   ]
 end
