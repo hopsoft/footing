@@ -42,7 +42,12 @@ class StringTest < MicroTest::Test
   end
 
   test ".titleize" do
-    assert "foobar test".titleize == "Foobar test"
+    assert "foobar test".titleize == "Foobar Test"
+  end
+
+  test ".classify" do
+    assert "foo_bar_test".classify == "FooBarTest"
+    assert "foo bar test".classify == "FooBarTest"
   end
 
   test ".humanize" do

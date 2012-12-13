@@ -37,9 +37,14 @@ module Footing
 
     # Similar to humanize but it capitalizes each word
     def titleize
-      self.split('_').map(&:capitalize).join(' ')
+      self.gsub(/\s/, "_").split('_').map(&:capitalize).join(' ')
     end
     alias :titlecase :titleize
+
+
+    def classify
+      self.gsub(/\s/, "_").titleize.gsub(/\W/, "")
+    end
 
     # Indicates if this string represents a number.
     def numeric?
