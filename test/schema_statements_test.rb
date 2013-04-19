@@ -21,10 +21,10 @@ class SchemaStatementsTest < MicroTest::Test
 
     @mock = MicroMock.make.new
     Footing.patch! @mock, Footing::PGSchemaStatements
-    @mock.stub(:quote_table_name) { |name| "\"#{name}\"" }
-    @mock.stub(:quote_column_name) { |name| "\"#{name}\"" }
-    @mock.stub(:execute) { |sql| @sql = sql }
-    @mock.stub(:sql) { @sql }
+    @mock.def(:quote_table_name) { |name| "\"#{name}\"" }
+    @mock.def(:quote_column_name) { |name| "\"#{name}\"" }
+    @mock.def(:execute) { |sql| @sql = sql }
+    @mock.def(:sql) { @sql }
   end
 
   test "create a datetime index with default precision of minute" do
@@ -52,8 +52,8 @@ class SchemaStatementsTest < MicroTest::Test
   end
 
   test "add timestamp indexes" do
-    @mock.stub(:execute) { |sql| @sql << sql }
-    @mock.stub(:sql) { @sql }
+    @mock.def(:execute) { |sql| @sql << sql }
+    @mock.def(:sql) { @sql }
     @mock.instance_eval { @sql = [] }
     @mock.add_timestamp_indexes :foo
     assert @mock.sql.include? "create index index_foo_on_created_at_by_day on \"foo\" (date_trunc('day', \"created_at\"))"
@@ -61,8 +61,8 @@ class SchemaStatementsTest < MicroTest::Test
   end
 
   test "remove timestamp indexes" do
-    @mock.stub(:execute) { |sql| @sql << sql }
-    @mock.stub(:sql) { @sql }
+    @mock.def(:execute) { |sql| @sql << sql }
+    @mock.def(:sql) { @sql }
     @mock.instance_eval { @sql = [] }
     @mock.remove_timestamp_indexes :foo
     assert @mock.sql.include? "drop index if exists index_foo_on_created_at_by_day"

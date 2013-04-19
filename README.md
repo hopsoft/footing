@@ -1,5 +1,9 @@
 # Footing
 
+[![Build Status](https://travis-ci.org/hopsoft/footing.png)](https://travis-ci.org/hopsoft/footing)
+[![Dependency Status](https://gemnasium.com/hopsoft/footing.png)](https://gemnasium.com/hopsoft/footing)
+[![Code Climate](https://codeclimate.com/github/hopsoft/footing.png)](https://codeclimate.com/github/hopsoft/footing)
+
 Footing provides some sanity for monkey patching practices.
 It's also a utility lib that contains additional functionality for core objects that you might find useful.
 

@@ -1,4 +1,5 @@
 _site
 .rvmrc
 .rbx
-footing*.gem
+*.gem
+Gemfile.lock
