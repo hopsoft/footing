@@ -2,6 +2,7 @@ require "bundler/gem_tasks"
 
 task :default => [:test]
 
+desc "Runs the tests."
 task :test do
   exec "bundle exec mt"
 end
