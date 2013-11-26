@@ -3,10 +3,10 @@ module Footing
 
     # Returns the eigen class for the object.
     def eigen
-      eigen = class << self
+      class << self
         self
       end
-    rescue Exception => ex
+    rescue Exception
       nil
     end
 

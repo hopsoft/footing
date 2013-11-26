@@ -1,3 +1,4 @@
+require "delegate"
 require File.join(File.dirname(__FILE__), "footing", "version")
 
 module Footing
@@ -32,7 +33,7 @@ module Footing
         context = class << obj
           self
         end
-      rescue Exception => ex
+      rescue Exception
       end
     end
 
@@ -49,25 +50,17 @@ module Footing
   # This allows users to invoke utility methods rather than monkey patching if they so desire.
   # @param [Module] mod The Module to setup util methods for.
   def self.util!(mod)
-    proxy = ::Object.new
-    proxy_eigen = class << proxy
-      self
-    end
-
+    proxy = Class.new(SimpleDelegator)
     Footing.patch! proxy, mod
 
-    eigen = class << mod
-      self
-    end
-
-    mod.instance_methods(false).each do |method|
-      eigen.send :define_method, method do |*args|
-        o = args.first || proxy
-        m = proxy_eigen.instance_method(method)
-        if m.parameters.empty?
-          m.bind(o).call
+    mod.instance_methods(false).each do |method_name|
+      mod.define_singleton_method(method_name) do |target, *args|
+        method = proxy.instance_method(method_name)
+        target = proxy.new(target)
+        if method.parameters.empty?
+          method.bind(target).call
         else
-          m.bind(o).call(*args)
+          method.bind(target).call(*args)
         end
       end
     end

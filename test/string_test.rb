@@ -24,13 +24,13 @@ class StringTest < MicroTest::Test
   end
 
   test ".random" do
-    key = Footing::String.random(100)
+    key = Footing::String.random("", 100)
     assert key.length == 100 # expected length
-    assert (key =~ /\W/).nil?    # no non-word chars
+    assert (key =~ /\W/).nil? # no non-word chars
   end
 
   test ".random with rejected chars" do
-    key = Footing::String.random(100, :upcase => true, :reject => [0, 1, 'I', 'O'])
+    key = Footing::String.random("", 100, :upcase => true, :reject => [0, 1, 'I', 'O'])
     assert key.length == 100  # expected length
     assert (key =~ /\W/).nil?     # no non-word chars
     assert (key =~ /[a-z]/).nil?  # no lowercase chars

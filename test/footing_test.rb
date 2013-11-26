@@ -38,7 +38,7 @@ class FootingTest < MicroTest::Test
 
     Footing.util! FooUtil
     assert FooUtil.respond_to? :foo
-    assert FooUtil.foo("bar") == "foobar"
+    assert FooUtil.foo(nil, "bar") == "foobar"
   end
 
 end
