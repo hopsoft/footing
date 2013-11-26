@@ -5,26 +5,28 @@
 [![Code Climate](https://codeclimate.com/github/hopsoft/footing.png)](https://codeclimate.com/github/hopsoft/footing)
 
 Footing provides some sanity for monkey patching practices.
+
 It's also a utility lib that contains additional functionality for core objects that you might find useful.
+Think of it as a lightweight version of ActiveSupport that doesn't implicitly change native behavior.
 
 #### NOTE: this lib is experimental at the moment
 
 ## No implicit monkey patching
 
-**No surprises here.** You must explicitly patch.
+You must explicitly apply monkey patches.
 
 ```ruby
-# some examples of explicit patching
 Footing.patch! String, Footing::String
 Footing.patch! Numeric, Footing::Numeric
 ```
 
+Patches are visible in the classes ancestry.
+
 ```ruby
-# instrospect the changes
 String.ancestors
 [
   String,
-  Footing::String,
+  Footing::String, # <--
   Comparable,
   Object,
   Kernel,
@@ -34,7 +36,7 @@ String.ancestors
 Numeric.ancestors
 [
   Numeric,
-  Footing::Numeric,
+  Footing::Numeric, # <--
   Comparable,
   Object,
   Kernel,
@@ -49,7 +51,7 @@ If you don't want to corrupt the entire runtime, you can patch an instance.
 ```ruby
 s = "foo"
 Footing.patch! s, Footing::String
-s.respond_to? :escape # => true
+s.respond_to? :escape     # => true
 "foo".respond_to? :escape # => false
 ```
 
@@ -70,19 +72,10 @@ Footing.util! Footing::String
 Footing::String.escape "foo", "o" # => "f\\o\\o"
 ```
 
-## Kick the tires
+## The Library
 
-1. `git clone git://github.com/hopsoft/footing.git`
-1. `cd /path/to/footing`
-1. `bundle`
-1. `./test`
-1. `./console`
-1. `Footing.patch! String, Footing::String`
+The suite of functionality is pretty small right now.
+Poke around the [extensions directory](https://github.com/hopsoft/footing/tree/master/lib/footing/extensions) to see what's available.
 
-or
+Pull requests welcome.
 
-1. `gem install footing`
-1. `irb`
-1. `require 'rubygems'`
-1. `require 'footing'`
-1. `Footing.patch! String, Footing::String`
