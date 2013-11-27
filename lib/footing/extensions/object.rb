@@ -15,5 +15,14 @@ module Footing
       !eigen.nil?
     end
 
+    # Trys to invoke a method on the object.
+    # Returns nil if the method isn't supported.
+    def try(name, *args, &block)
+      if respond_to?(name)
+        return public_send(name, *args, &block)
+      end
+      nil
+    end
+
   end
 end

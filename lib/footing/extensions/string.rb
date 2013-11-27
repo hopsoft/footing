@@ -22,8 +22,7 @@ module Footing
       (1..length).map{ |i| (chars - opts[:reject]).sample }.join
     end
 
-    # Escapes a series of chars in the current string.
-    # NOTE: A new string is returned.
+    # Escapes a series of chars.
     def escape(*chars)
       gsub(/(?<!\\)(#{chars.join("|")})/) do |char|
         "\\" + char

@@ -1,7 +1,6 @@
-require File.join(File.dirname(__FILE__), "test_helper")
+require File.expand_path("../test_helper", __FILE__)
 
 class NumericTest < MicroTest::Test
-  Footing.patch! Numeric, Footing::Numeric
 
   test ".positive" do
     assert -10.positive == 10

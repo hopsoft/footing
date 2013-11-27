@@ -1,4 +1,4 @@
-require File.join(File.dirname(__FILE__), "test_helper")
+require File.expand_path("../test_helper", __FILE__)
 
 class SchemaStatementsTest < MicroTest::Test
 
@@ -20,11 +20,11 @@ class SchemaStatementsTest < MicroTest::Test
     )
 
     @mock = MicroMock.make.new
-    Footing.patch! @mock, Footing::PGSchemaStatements
     @mock.def(:quote_table_name) { |name| "\"#{name}\"" }
     @mock.def(:quote_column_name) { |name| "\"#{name}\"" }
     @mock.def(:execute) { |sql| @sql = sql }
     @mock.def(:sql) { @sql }
+    Footing.patch! @mock, Footing::PGSchemaStatements
   end
 
   test "create a datetime index with default precision of minute" do

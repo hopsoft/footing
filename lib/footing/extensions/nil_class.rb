@@ -1,13 +1,12 @@
 module Footing
   module NilClass
 
-    # Similar to ActiveSupport's #try added to NilClass.
-    # Calling [] on nil always returns nil.
-    # It becomes especially helpful when navigating through deeply nested Hashes.
+    # Calling [] on nil returns nil instead of raising an exception.
+    # Helpful when looping over nested Hashes.
     #
     # @example
     #   dict = {}
-    #   dict[:foo][:bar][:other] # => nil
+    #   dict[:foo][:bar][:baz] # => nil
     #
     # @param [Object] key The key to lookup.
     def [](key)

@@ -9,8 +9,6 @@ Footing provides some sanity for monkey patching practices.
 It's also a utility lib that contains additional functionality for core objects that you might find useful.
 Think of it as a lightweight version of ActiveSupport that doesn't implicitly change native behavior.
 
-#### NOTE: this lib is experimental at the moment
-
 ## No implicit monkey patching
 
 You must explicitly apply monkey patches.
@@ -53,14 +51,6 @@ s = "foo"
 Footing.patch! s, Footing::String
 s.respond_to? :escape     # => true
 "foo".respond_to? :escape # => false
-```
-
-## Shotgun patching
-
-For the lazy and brave, you can also patch everything at once.
-
-```ruby
-Footing.patch_all!
 ```
 
 ## Patch free

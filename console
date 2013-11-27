@@ -2,10 +2,9 @@
 require "pry"
 
 def reload
-  ENV["FOOTING_DEV"] = "true"
-  path = File.expand_path(File.join(File.dirname(__FILE__), 'lib', 'footing.rb'))
-  load path
+  load File.expand_path("../lib/footing.rb", __FILE__)
 end
 
+ENV["FOOTING_DEV"] = "true"
 reload
 Pry.start
