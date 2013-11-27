@@ -14,7 +14,7 @@ module Footing
     # @return [Hash] A new Hash that has been re-keyed.
     def rekey(method_name)
       inject({}) do |new_hash, (key, value)|
-        new_hash[key.send(method_name)] = value
+        new_hash[key.public_send(method_name)] = value
         new_hash
       end
     end
