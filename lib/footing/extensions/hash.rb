@@ -37,7 +37,7 @@ module Footing
       end
     end
 
-    # Adjusts the values of the Hash in place.
+    # Recursively adjusts the values of the Hash in place.
     #
     # @example
     #   dict = {:a => 1, :b => 2, :c => 3}
@@ -46,8 +46,15 @@ module Footing
     #
     # @yield [value] Yields the current value to the block.
     #                The result of the block is then assigned to the corresponding key.
-    def adjust_values!
-      each { |k, v| self[k] = yield(v) }
+    def adjust_values!(&block)
+      each do |key, value|
+        if value.respond_to?(:adjust_values!)
+          value.adjust_values!(&block)
+        else
+          self[key] = yield(value)
+        end
+      end
+      self
     end
 
     # Recursively casts all string values in this Hash.
