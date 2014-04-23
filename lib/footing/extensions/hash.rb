@@ -13,7 +13,7 @@ module Footing
     # @param [Symbol] name The method name to invoke on the existing keys.
     # @return [Hash] A new Hash that has been re-keyed.
     def rekey(method_name)
-      inject({}) do |new_hash, (key, value)|
+      reduce({}) do |new_hash, (key, value)|
         new_hash[key.public_send(method_name)] = value
         new_hash
       end
@@ -24,15 +24,20 @@ module Footing
     # @yield [value] Yields the value after the encoding has been applied.
     def force_encoding!(encoding, &block)
       each do |key, value|
-        case value
-          when String
-            # force encoding then strip all non ascii chars
-            if block_given?
-              self[key] = yield(value.force_encoding(encoding))
-            else
-              self[key] = value.force_encoding(encoding)
-            end
-          when Hash then value.force_encoding!(encoding, &block)
+        if value.respond_to?(:force_encoding!)
+          value.force_encoding!(encoding, &block)
+        elsif value.is_a?(Enumerable)
+          value.each do |val|
+            next unless val.respond_to?(:force_encoding!)
+            val.force_encoding!(encoding, &block)
+          end
+        elsif value.is_a?(String)
+          # force encoding then strip all non ascii chars
+          if block_given?
+            self[key] = yield(value.force_encoding(encoding))
+          else
+            self[key] = value.force_encoding(encoding)
+          end
         end
       end
     end
@@ -50,6 +55,11 @@ module Footing
       each do |key, value|
         if value.respond_to?(:adjust_values!)
           value.adjust_values!(&block)
+        elsif value.is_a?(Enumerable)
+          value.each do |val|
+            next unless val.respond_to?(:adjust_values!)
+            val.adjust_values!(&block)
+          end
         else
           self[key] = yield(value)
         end
@@ -63,6 +73,11 @@ module Footing
       each do |key, value|
         if value.respond_to?(:cast_values!)
           value.cast_values!
+        elsif value.is_a?(Enumerable)
+          value.each do |val|
+            next unless val.respond_to?(:cast_values!)
+            val.cast_values!
+          end
         elsif value.respond_to?(:cast)
           self[key] = value.cast
         end
