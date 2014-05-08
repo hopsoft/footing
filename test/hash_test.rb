@@ -44,4 +44,16 @@ class HashTest < MicroTest::Test
     assert dict.cast_values! == expected
   end
 
+  test ".filter!" do
+    dict = {:a => 1, :b => 2, :c => 3}
+    dict.filter!([:b, :c])
+    assert dict == {:a => 1, :b => "[FILTERED]", :c => "[FILTERED]"}
+  end
+
+  test ".silence!" do
+    dict = {:a => 1, :b => 2, :c => 3}
+    dict.silence!([:a, :b])
+    assert dict == {:a => nil, :b => nil, :c => 3}
+  end
+
 end

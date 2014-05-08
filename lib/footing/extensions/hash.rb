@@ -85,5 +85,30 @@ module Footing
       self
     end
 
+    def filter!(keys, replacement="[FILTERED]")
+      keys = keys.reduce({}) do |memo, key|
+        memo[key.to_s] = true
+        memo
+      end
+      each do |key, value|
+        if value.respond_to?(:filter!)
+          value.filter!(*keys)
+        elsif value.is_a?(Enumerable)
+          value.each do |val|
+            next unless val.respond_to?(:filter!)
+            val.filter!(*keys)
+          end
+        else
+          value = replacement if keys[key.to_s]
+          self[key] = value
+        end
+      end
+      self
+    end
+
+    def silence!(keys)
+      filter! keys, nil
+    end
+
   end
 end
