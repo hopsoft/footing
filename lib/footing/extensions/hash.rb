@@ -97,11 +97,11 @@ module Footing
 
       each do |key, value|
         if value.respond_to?(:filter!)
-          value.filter!(*keys)
+          value.filter!(keys, replacement)
         elsif value.is_a?(Enumerable)
           value.each do |val|
             next unless val.respond_to?(:filter!)
-            val.filter!(*keys)
+            val.filter!(keys, replacement)
           end
         else
           value = replacement if should_replace.call(key)
@@ -113,6 +113,10 @@ module Footing
 
     def silence!(keys)
       filter! keys, nil
+    end
+
+    def copy
+      Marshal.load(Marshal.dump(self))
     end
 
   end

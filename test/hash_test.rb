@@ -56,6 +56,20 @@ class HashTest < MicroTest::Test
     assert dict == {:aaa => :x, :aab => :x, :abb => :x}
   end
 
+  test ".filter! nested" do
+    dict = { foo: { bar: false }, bar: true}
+    dict.filter!([:bar])
+    assert dict == { foo: { bar: "[FILTERED]" }, bar: "[FILTERED]"}
+  end
+
+  test ".filter! copy" do
+    dict = { foo: { bar: false }, bar: true}
+    copy = dict.copy
+    copy.filter!([:bar])
+    assert dict == { foo: { bar: false }, bar: true}
+    assert copy == { foo: { bar: "[FILTERED]" }, bar: "[FILTERED]"}
+  end
+
   test ".silence!" do
     dict = {:a => 1, :b => 2, :c => 3}
     dict.silence!([:a, :b])
