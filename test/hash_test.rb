@@ -50,6 +50,12 @@ class HashTest < MicroTest::Test
     assert dict == {:a => 1, :b => "[FILTERED]", :c => "[FILTERED]"}
   end
 
+  test ".filter! with regexp" do
+    dict = {:aaa => 1, :aab => 2, :abb => 3}
+    dict.filter!([:aaa, /ab/], :x)
+    assert dict == {:aaa => :x, :aab => :x, :abb => :x}
+  end
+
   test ".silence!" do
     dict = {:a => 1, :b => 2, :c => 3}
     dict.silence!([:a, :b])

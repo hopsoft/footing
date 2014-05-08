@@ -86,10 +86,15 @@ module Footing
     end
 
     def filter!(keys, replacement="[FILTERED]")
-      keys = keys.reduce({}) do |memo, key|
-        memo[key.to_s] = true
-        memo
+      should_replace = lambda do |key|
+        replace = false
+        keys.each do |k|
+          break if replace
+          replace = k.is_a?(Regexp) ? key.to_s =~ k : key.to_s == k.to_s
+        end
+        replace
       end
+
       each do |key, value|
         if value.respond_to?(:filter!)
           value.filter!(*keys)
@@ -99,7 +104,7 @@ module Footing
             val.filter!(*keys)
           end
         else
-          value = replacement if keys[key.to_s]
+          value = replacement if should_replace.call(key)
           self[key] = value
         end
       end
