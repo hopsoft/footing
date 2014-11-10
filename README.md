@@ -1,8 +1,10 @@
 # Footing
 
-[![Build Status](https://travis-ci.org/hopsoft/footing.png)](https://travis-ci.org/hopsoft/footing)
+[![Lines of Code](http://img.shields.io/badge/loc-287-brightgreen.svg)](http://blog.codinghorror.com/the-best-code-is-no-code-at-all/)
+[![Code Status](https://codeclimate.com/github/hopsoft/footing.png)](https://codeclimate.com/github/hopsoft/footing)
 [![Dependency Status](https://gemnasium.com/hopsoft/footing.png)](https://gemnasium.com/hopsoft/footing)
-[![Code Climate](https://codeclimate.com/github/hopsoft/footing.png)](https://codeclimate.com/github/hopsoft/footing)
+[![Build Status](https://travis-ci.org/hopsoft/footing.png)](https://travis-ci.org/hopsoft/footing)
+[![Coverage Status](https://img.shields.io/coveralls/hopsoft/footing.svg)](https://coveralls.io/r/hopsoft/footing?branch=master)
 
 Footing provides some sanity for monkey patching practices.
 
