@@ -3,7 +3,7 @@
 [![Dependency Status](http://img.shields.io/gemnasium/hopsoft/footing.svg?style=flat)](https://gemnasium.com/hopsoft/footing)
 [![Build Status](http://img.shields.io/travis/hopsoft/footing.svg?style=flat)](https://travis-ci.org/hopsoft/footing)
 [![Coverage Status](https://img.shields.io/coveralls/hopsoft/footing.svg?style=flat)](https://coveralls.io/r/hopsoft/footing?branch=master)
-[![Downloads](http://img.shields.io/gem/dt/coast.svg?style=flat)](http://rubygems.org/gems/footing)
+[![Downloads](http://img.shields.io/gem/dt/footing.svg?style=flat)](http://rubygems.org/gems/footing)
 
 # Footing
 
