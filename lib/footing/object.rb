@@ -18,7 +18,7 @@ module Footing
     end
 
     def method_missing(name, *args)
-      if respond_to?(name)
+      if wrapped_object.respond_to?(name)
         eigen.instance_eval do
           define_method(name) { |*a| wrapped_object.send name, *a }
         end
