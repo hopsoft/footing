@@ -1,79 +1,31 @@
 require File.expand_path("../test_helper", __FILE__)
 
-class HashTest < MicroTest::Test
-
-  test ".adjust_values!" do
-    dict = {:a => 1, :b => 2, :c => 3}
-    dict.adjust_values! { |v| v.to_s }
-    assert dict == {:a=>"1", :b=>"2", :c=>"3"}
-  end
-
-  test ".cast_values!" do
-    dict = {
-      :integer => "1",
-      :float => "0.1",
-      :true => "true",
-      :false => "false",
-      :ilist => ["1", "2", "3"],
-      :flist => ["0.1", "0.2", "0.3"],
-      :nested => {
-        :number => "1",
-        :true => "true",
-        :false => "false",
-        :ilist => ["1", "2", "3"],
-        :flist => ["0.1", "0.2", "0.3"]
-      }
-    }
-
-    expected = {
-      :integer => 1,
-      :float => 0.1,
-      :true => true,
-      :false => false,
-      :ilist => [1, 2, 3],
-      :flist => [0.1, 0.2, 0.3],
-      :nested => {
-        :number => 1,
-        :true => true,
-        :false => false,
-        :ilist => [1, 2, 3],
-        :flist => [0.1, 0.2, 0.3]
-      }
-    }
-
-    assert dict.cast_values! == expected
-  end
+class HashTest < PryTest::Test
 
   test ".filter!" do
     dict = {:a => 1, :b => 2, :c => 3}
-    dict.filter!([:b, :c])
+    Footing.hash(dict).filter!([:b, :c])
     assert dict == {:a => 1, :b => "[FILTERED]", :c => "[FILTERED]"}
   end
 
   test ".filter! with regexp" do
     dict = {:aaa => 1, :aab => 2, :abb => 3}
-    dict.filter!([:aaa, /ab/], :x)
+    Footing.hash(dict).filter!([:aaa, /ab/], :x)
     assert dict == {:aaa => :x, :aab => :x, :abb => :x}
   end
 
   test ".filter! nested" do
     dict = { foo: { bar: false }, bar: true}
-    dict.filter!([:bar])
+    Footing.hash(dict).filter!([:bar])
     assert dict == { foo: { bar: "[FILTERED]" }, bar: "[FILTERED]"}
   end
 
   test ".filter! copy" do
     dict = { foo: { bar: false }, bar: true}
-    copy = dict.copy
-    copy.filter!([:bar])
+    copy = Footing.object(dict).copy
+    Footing.hash(copy).filter!([:bar])
     assert dict == { foo: { bar: false }, bar: true}
     assert copy == { foo: { bar: "[FILTERED]" }, bar: "[FILTERED]"}
-  end
-
-  test ".silence!" do
-    dict = {:a => 1, :b => 2, :c => 3}
-    dict.silence!([:a, :b])
-    assert dict == {:a => nil, :b => nil, :c => 3}
   end
 
 end

@@ -15,7 +15,6 @@ Gem::Specification.new do |spec|
   spec.test_files = Dir["lib/**/*.rb"]
 
   spec.add_development_dependency "rake"
-  spec.add_development_dependency "micro_test"
-  spec.add_development_dependency "micro_mock"
+  spec.add_development_dependency "pry-test"
   spec.add_development_dependency "coveralls"
 end
