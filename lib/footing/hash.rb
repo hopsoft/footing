@@ -13,11 +13,11 @@ module Footing
 
       wrapped_object.each do |key, value|
         if value.is_a?(::Hash)
-          Footing.hash(value).filter!(keys, replacement)
+          wrap(value).filter!(keys, replacement)
         elsif value.is_a?(Enumerable)
           value.each do |val|
             if val.is_a?(::Hash)
-              Footing.hash(val).filter!(keys, replacement)
+              wrap(val).filter!(keys, replacement)
             end
           end
         else

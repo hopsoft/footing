@@ -4,7 +4,7 @@ class ObjectTest < PryTest::Test
 
   test "copy" do
     obj = Object.new
-    footing_obj = Footing.object(obj)
+    footing_obj = Footing::Object.new(obj)
     copy = footing_obj.copy
 
     assert obj == footing_obj.wrapped_object

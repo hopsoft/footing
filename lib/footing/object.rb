@@ -1,7 +1,16 @@
-module Footing
+require "forwardable"
 
+module Footing
   class Object
+    extend Forwardable
+    def_delegators :"self.class", :wrap
+
     attr_reader :wrapped_object
+
+    def self.wrap(o)
+      return o if o.is_a?(self)
+      new o
+    end
 
     def initialize(o)
       @wrapped_object = o
