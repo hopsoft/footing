@@ -7,12 +7,23 @@ module Footing
 
     attr_reader :wrapped_object
 
-    def self.wrap(o)
-      return o if o.is_a?(self)
-      new o
+    class << self
+      def target_name
+        self.name.gsub(/\AFooting::/, "")
+      end
+
+      def match?(o)
+        o.class.ancestors.map(&:name).include?(target_name)
+      end
+
+      def wrap(o)
+        return o if o.is_a?(self)
+        new o
+      end
     end
 
     def initialize(o)
+      raise ArgumentError.new("Types must match") unless self.class.match?(o)
       @wrapped_object = o
     end
 

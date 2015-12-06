@@ -1,6 +1,17 @@
 require File.expand_path("../test_helper", __FILE__)
 
 class HashTest < PryTest::Test
+  test ".target_name" do
+    assert Footing::Hash.target_name == ::Hash.name
+  end
+
+  test ".new with invalid type" do
+    begin
+      Footing::Hash.new("")
+    rescue ArgumentError => error
+    end
+    assert error
+  end
 
   test ".filter!" do
     dict = {:a => 1, :b => 2, :c => 3}
