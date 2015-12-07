@@ -13,8 +13,8 @@ instead of [monkey patching](https://en.wikipedia.org/wiki/Monkey_patch).
 
 ## Immutabilty
 
-Footing employs some principles of [immutability](https://en.wikipedia.org/wiki/Immutable_object) common in functional programming.
-Namely, the integrity of the original object is preserved because a deep copy of it is created by default.
+Footing employs some principles of [immutability](https://en.wikipedia.org/wiki/Immutable_object) that are common in functional programming.
+The integrity of original objects/data is preserved because Footing creates a deep copy&mdash; by default.
 _Note: This behavior can be overridden when to improve performance... just be sure you know what you're doing_
 
 ## Hash
