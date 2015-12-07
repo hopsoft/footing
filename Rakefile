@@ -4,6 +4,6 @@ task :default => [:test]
 
 desc "Runs the tests."
 task :test do
-  exec "bundle exec mt"
+  exec "bundle exec pry-test --disable-pry"
 end
 
