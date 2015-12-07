@@ -13,7 +13,8 @@ instead of [monkey patching](https://en.wikipedia.org/wiki/Monkey_patch).
 
 ## Immutabilty
 
-Footing employs some principles of [immutability](https://en.wikipedia.org/wiki/Immutable_object) that are common in functional programming.
+Footing employs some principles of [immutability](https://en.wikipedia.org/wiki/Immutable_object) that are common in
+[functional programming](https://en.wikipedia.org/wiki/Functional_programming).
 The integrity of original objects/data is preserved because Footing creates a deep copy by default.
 _Note: This behavior can be overridden to improve performance... just be sure you know what you're doing_
 
@@ -25,7 +26,7 @@ Recursively filter out unwanted values based key.
 
 ```ruby
 data = { name: "Joe", password: "secret" }
-copy = Footing::Hash.wrap(data)
+copy = Footing::Hash.new(data)
 copy.filter!(:password)
-copy.wrapped_object # => {:name=>"Joe", :password=>"[FILTERED]"}
+copy.inner_object # => {:name=>"Joe", :password=>"[FILTERED]"}
 ```

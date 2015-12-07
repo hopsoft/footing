@@ -17,13 +17,13 @@ module Footing
         replace
       end
 
-      wrapped_object.each do |key, value|
+      inner_object.each do |key, value|
         if value.is_a?(::Hash)
-          wrap(value, copy: false).filter!(keys, replacement: replacement)
+          Footing::Hash.new(value, copy: false).filter!(keys, replacement: replacement)
         elsif value.is_a?(Enumerable)
           value.each do |val|
             if val.is_a?(::Hash)
-              wrap(val, copy: false).filter!(keys, replacement: replacement)
+              Footing::Hash.new(val, copy: false).filter!(keys, replacement: replacement)
             end
           end
         else

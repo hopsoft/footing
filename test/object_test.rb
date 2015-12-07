@@ -2,24 +2,24 @@ require File.expand_path("../test_helper", __FILE__)
 
 class ObjectTest < PryTest::Test
 
-  test ".wrap once" do
+  test ".new once" do
     obj = Object.new
-    wrapped = Footing::Object.wrap(obj)
-    assert wrapped.class.ancestors.include?(Footing::Object)
+    copy = Footing::Object.new(obj)
+    assert copy.class.ancestors.include?(Footing::Object)
   end
 
-  test ".wrap multiple" do
+  test ".new multiple" do
     obj = Object.new
-    wrapped1 = Footing::Object.wrap(obj)
-    wrapped2 = Footing::Object.wrap(wrapped1)
-    assert wrapped1.eql?(wrapped2)
+    copy1 = Footing::Object.new(obj)
+    copy2 = Footing::Object.new(copy1)
+    assert copy1.eql?(copy2)
   end
 
   test ".eigen" do
     obj = Object.new
-    wrapped = Footing::Object.wrap(obj)
-    eigen = class << wrapped; self; end
-    assert eigen.eql?(wrapped.eigen)
+    copy = Footing::Object.new(obj)
+    eigen = class << copy; self; end
+    assert eigen.eql?(copy.eigen)
   end
 
   test ".copy" do

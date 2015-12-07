@@ -23,21 +23,21 @@ class HashTest < PryTest::Test
     dict = {:a => 1, :b => 2, :c => 3}
     filtered = Footing::Hash.new(dict).filter!([:b, :c])
     assert dict == {:a => 1, :b => 2, :c => 3}
-    assert filtered.wrapped_object == {:a => 1, :b => "[FILTERED]", :c => "[FILTERED]"}
+    assert filtered.inner_object == {:a => 1, :b => "[FILTERED]", :c => "[FILTERED]"}
   end
 
   test ".filter! with regexp" do
     dict = {:aaa => 1, :aab => 2, :abb => 3}
     filtered = Footing::Hash.new(dict).filter!([:aaa, /ab/], replacement: :x)
     assert dict == {:aaa => 1, :aab => 2, :abb => 3}
-    assert filtered.wrapped_object == {:aaa => :x, :aab => :x, :abb => :x}
+    assert filtered.inner_object == {:aaa => :x, :aab => :x, :abb => :x}
   end
 
   test ".filter! nested" do
     dict = { foo: { bar: false }, bar: true}
     filtered = Footing::Hash.new(dict).filter!([:bar])
     assert dict == { foo: { bar: false }, bar: true}
-    assert filtered.wrapped_object == { foo: { bar: "[FILTERED]" }, bar: "[FILTERED]"}
+    assert filtered.inner_object == { foo: { bar: "[FILTERED]" }, bar: "[FILTERED]"}
   end
 
 end
