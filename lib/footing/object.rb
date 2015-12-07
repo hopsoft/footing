@@ -16,14 +16,19 @@ module Footing
         o.class.ancestors.map(&:name).include?(target_name)
       end
 
-      def wrap(o)
+      def wrap(o, copy: true)
         return o if o.is_a?(self)
-        new o
+        new o, copy: copy
+      end
+
+      def copy(o)
+        Marshal.load Marshal.dump(o)
       end
     end
 
-    def initialize(o)
+    def initialize(o, copy: true)
       raise ArgumentError.new("Types must match") unless self.class.match?(o)
+      o = self.class.copy(o) if copy
       @wrapped_object = o
     end
 
@@ -31,10 +36,6 @@ module Footing
       @eigen ||= class << self
         self
       end
-    end
-
-    def copy
-      Marshal.load(Marshal.dump(wrapped_object))
     end
 
     def method_missing(name, *args)

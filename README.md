@@ -1,4 +1,4 @@
-[![Lines of Code](http://img.shields.io/badge/lines_of_code-279-brightgreen.svg?style=flat)](http://blog.codinghorror.com/the-best-code-is-no-code-at-all/)
+[![Lines of Code](http://img.shields.io/badge/lines_of_code-83-brightgreen.svg?style=flat)](http://blog.codinghorror.com/the-best-code-is-no-code-at-all/)
 [![Code Status](http://img.shields.io/codeclimate/github/hopsoft/footing.svg?style=flat)](https://codeclimate.com/github/hopsoft/footing)
 [![Dependency Status](http://img.shields.io/gemnasium/hopsoft/footing.svg?style=flat)](https://gemnasium.com/hopsoft/footing)
 [![Build Status](http://img.shields.io/travis/hopsoft/footing.svg?style=flat)](https://travis-ci.org/hopsoft/footing)
@@ -7,68 +7,25 @@
 
 # Footing
 
-Footing provides some sanity for monkey patching practices.
+An [ActiveSupport](https://github.com/rails/rails/tree/master/activesupport)
+style utility library that employs [delegation](https://en.wikipedia.org/wiki/Delegation_(programming))
+instead of [monkey patching](https://en.wikipedia.org/wiki/Monkey_patch).
 
-It's also a utility lib that contains additional functionality for core objects that you might find useful.
-Think of it as a lightweight version of ActiveSupport that doesn't implicitly change native behavior.
+## Immutabilty
 
-## No implicit monkey patching
+Footing employs some principles of [immutability](https://en.wikipedia.org/wiki/Immutable_object) common in functional programming.
+Namely, the integrity of the original object is preserved because a deep copy of it is created by default.
+_Note: This behavior can be overridden when to improve performance... just be sure you know what you're doing_
 
-You must explicitly apply monkey patches.
+## Hash
 
-```ruby
-Footing.patch! String, Footing::String
-Footing.patch! Numeric, Footing::Numeric
-```
+### Filter
 
-Patches are visible in the classes ancestry.
-
-```ruby
-String.ancestors
-[
-  String,
-  Footing::String, # <--
-  Comparable,
-  Object,
-  Kernel,
-  BasicObject
-]
-
-Numeric.ancestors
-[
-  Numeric,
-  Footing::Numeric, # <--
-  Comparable,
-  Object,
-  Kernel,
-  BasicObject
-]
-```
-
-## Instance patching
-
-If you don't want to corrupt the entire runtime, you can patch an instance.
+Recursively filter out unwanted values based key.
 
 ```ruby
-s = "foo"
-Footing.patch! s, Footing::String
-s.respond_to? :escape     # => true
-"foo".respond_to? :escape # => false
+data = { name: "Joe", password: "secret" }
+copy = Footing::Hash.wrap(data)
+copy.filter!(:password)
+copy.wrapped_object # => {:name=>"Joe", :password=>"[FILTERED]"}
 ```
-
-## Patch free
-
-Dont like monkey patches? Run patch free by setting up utility methods instead.
-
-```ruby
-Footing.util! Footing::String
-Footing::String.escape "foo", "o" # => "f\\o\\o"
-```
-
-## The Library
-
-The suite of functionality is pretty small right now.
-Poke around the [extensions directory](https://github.com/hopsoft/footing/tree/master/lib/footing/extensions) to see what's available.
-
-Pull requests welcome.
-

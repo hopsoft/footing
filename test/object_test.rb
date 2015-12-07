@@ -5,7 +5,6 @@ class ObjectTest < PryTest::Test
   test ".wrap once" do
     obj = Object.new
     wrapped = Footing::Object.wrap(obj)
-    assert obj == wrapped.wrapped_object
     assert wrapped.class.ancestors.include?(Footing::Object)
   end
 
@@ -25,9 +24,7 @@ class ObjectTest < PryTest::Test
 
   test ".copy" do
     obj = Object.new
-    wrapped = Footing::Object.new(obj)
-    copy = wrapped.copy
-    assert obj == wrapped.wrapped_object
+    copy = Footing::Object.copy(obj)
     assert !obj.eql?(copy)
   end
 

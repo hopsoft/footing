@@ -1,7 +1,13 @@
 module Footing
   class Hash < Footing::Object
 
-    def filter!(keys, replacement="[FILTERED]")
+    # Recursively filters the values for the specified keys in place.
+    # IMPORTANT: This mutates the Hash.
+    #
+    # @param keys [Array<Symbol,String,Regexp>] The keys to filter
+    # @param replacement [Object] The replacement value to use
+    # @return [Footing::Hash] Returns self
+    def filter!(keys, replacement: "[FILTERED]")
       should_replace = lambda do |key|
         replace = false
         keys.each do |k|
@@ -13,11 +19,11 @@ module Footing
 
       wrapped_object.each do |key, value|
         if value.is_a?(::Hash)
-          wrap(value).filter!(keys, replacement)
+          wrap(value, copy: false).filter!(keys, replacement: replacement)
         elsif value.is_a?(Enumerable)
           value.each do |val|
             if val.is_a?(::Hash)
-              wrap(val).filter!(keys, replacement)
+              wrap(val, copy: false).filter!(keys, replacement: replacement)
             end
           end
         else
