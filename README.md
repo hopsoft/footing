@@ -11,12 +11,14 @@ An [ActiveSupport](https://github.com/rails/rails/tree/master/activesupport)
 style utility library that employs [delegation](https://en.wikipedia.org/wiki/Delegation_(programming))
 instead of [monkey patching](https://en.wikipedia.org/wiki/Monkey_patch).
 
+_NOTE: The project is structured so that it can support explicit monkey patching if you prefer to use that strategy._
+
 ## Immutabilty
 
 Footing employs some principles of [immutability](https://en.wikipedia.org/wiki/Immutable_object) that are common in
 [functional programming](https://en.wikipedia.org/wiki/Functional_programming).
 The integrity of original objects/data is preserved because Footing creates a deep copy by default.
-_Note: This behavior can be overridden to improve performance... just be sure you know what you're doing_
+_NOTE: This behavior can be overridden to improve performance... just be sure you know what you're doing_
 
 ## Hash
 

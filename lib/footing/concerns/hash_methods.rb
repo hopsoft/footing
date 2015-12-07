@@ -17,7 +17,7 @@ module Footing
         replace
       end
 
-      inner_object.each do |key, value|
+      Footing::Hash.new(self).inner_object.each do |key, value|
         if value.is_a?(::Hash)
           Footing::Hash.new(value, copy: false).filter!(keys, replacement: replacement)
         elsif value.is_a?(Enumerable)
