@@ -25,7 +25,7 @@ __NOTE:__ _This behavior can be overridden to improve performance... just be sur
 
 ### Filter
 
-Recursively filter out unwanted values based key.
+Recursively filter out unwanted values based on key.
 
 ```ruby
 data = { name: "Joe", password: "secret" }
