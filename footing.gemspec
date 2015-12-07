@@ -5,8 +5,8 @@ Gem::Specification.new do |spec|
   spec.license = "MIT"
   spec.version = Footing::VERSION
   spec.homepage = "https://github.com/hopsoft/footing"
-  spec.summary = "A utility belt lib with sane monkey patching."
-  spec.description = "A utility belt lib with sane monkey patching."
+  spec.summary = "An ActiveSupport style utility library that employs delegation instead of monkey patching"
+  spec.description = "An ActiveSupport style utility library that employs delegation instead of monkey patching"
 
   spec.authors = ["Nathan Hopkins"]
   spec.email = ["natehop@gmail.com"]
