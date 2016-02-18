@@ -15,17 +15,4 @@ class ObjectTest < PryTest::Test
     assert copy1.eql?(copy2)
   end
 
-  test ".eigen" do
-    obj = Object.new
-    copy = Footing::Object.new(obj)
-    eigen = class << copy; self; end
-    assert eigen.eql?(copy.eigen)
-  end
-
-  test ".copy" do
-    obj = Object.new
-    copy = Footing::Object.copy(obj)
-    assert !obj.eql?(copy)
-  end
-
 end
