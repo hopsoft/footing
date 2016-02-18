@@ -1,4 +1,7 @@
 language: ruby
+install:
+  - "gem install bundler"
+  - "bundle install"
 rvm:
-  - "2.2.2"
+  - "2.3.0"
 
