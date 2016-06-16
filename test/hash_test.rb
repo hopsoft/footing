@@ -65,4 +65,9 @@ class HashTest < PryTest::Test
     rekeyed = Footing::Hash.new(dict).update_keys! { |key| key.to_s }
     assert rekeyed.to_h == {"a" => 1, "b" => [ { "c" => 3 } ] }
   end
+
+  test ".to_h" do
+    dict = {:a => 1, :b => 2, :c => 3}
+    assert Footing::Hash.new(dict).to_h == dict
+  end
 end

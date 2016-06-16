@@ -13,6 +13,8 @@ module Footing
       initialize_nested
     end
 
+    # Returns a standard ruby Hash representation of the wrapped Hash.
+    # @return [Hash]
     def to_h
       copied_object.each_with_object({}) do |pair, memo|
         value = pair.last
