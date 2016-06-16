@@ -12,8 +12,6 @@ An [ActiveSupport](https://github.com/rails/rails/tree/master/activesupport)
 style utility library that employs [delegation](https://en.wikipedia.org/wiki/Delegation_(programming))
 instead of [monkey patching](https://en.wikipedia.org/wiki/Monkey_patch).
 
-__NOTE:__ _The project is structured so that it can support explicit monkey patching if you prefer to use that strategy._
-
 ## Immutabilty
 
 Footing employs some principles of [immutability](https://en.wikipedia.org/wiki/Immutable_object) that are common in
