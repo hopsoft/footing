@@ -86,7 +86,7 @@ module Footing
         elsif value.is_a?(::Array)
           value.each do |val|
             if val.is_a?(Footing::Hash)
-              value.filter!(keys, replacement: replacement)
+              val.filter!(keys, replacement: replacement)
             end
           end
         else
