@@ -30,13 +30,31 @@ class HashTest < PryTest::Test
   test ".update_keys! with nested hash" do
     dict = { a: 1, b: { c: 3 } }
     dict.update_keys! { |key| key.to_s }
-    assert dict == { "a" => 1, "b" => { "c" => 3} }
+    assert dict == { "a" => 1, "b" => { "c" => 3 } }
   end
 
   test ".update_keys! with nested array with hash" do
     dict = { a: 1, b: [ { c: 3 } ] }
     dict.update_keys! { |key| key.to_s }
     assert dict == { "a" => 1, "b" => [ { "c" => 3 } ] }
+  end
+
+  test ".update_values!" do
+    dict = { a: "1", b: "2", c: "3" }
+    dict.update_values! { |value| value.to_i ** 2 }
+    assert dict == { a: 1, b: 4, c: 9 }
+  end
+
+  test ".update_values! with nested hash" do
+    dict = { a: "1", b: { c: "3" } }
+    dict.update_values! { |value| value.to_i ** 2 }
+    assert dict == { a: 1, b: { c: 9 } }
+  end
+
+  test ".update_values! with nested array with hash" do
+    dict = { a: "1", b: [ { c: "3" } ] }
+    dict.update_values! { |value| value.to_i ** 2 }
+    assert dict == { a: 1, b: [ { c: 9 } ] }
   end
 
   test ".cast_string_values! with boolean" do

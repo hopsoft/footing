@@ -16,10 +16,16 @@ module Footing
         self
       end
 
+      # Recursively updates values in place by passing them though the given block.
+      def update_values!(&block)
+        keys.each { |key, value| update_value_for key, &block }
+        self
+      end
+
       # Recursively filters the values for the specified keys in place.
       def filter!(keys_to_filter, replacement: "[FILTERED]")
         each do |key, value|
-          self[key] = filtered_value(key, value, keys_to_filter, replacement: replacement)
+          self[key] = filtered_value(key, keys_to_filter, replacement: replacement)
         end
         self
       end
@@ -35,9 +41,10 @@ module Footing
           !!should_filter
         end
 
-        def filtered_value(key, value, keys_to_filter, replacement: "[FILTERED]")
+        def filtered_value(key, keys_to_filter, replacement: "[FILTERED]")
+          value = self[key]
           return value.filter!(keys_to_filter, replacement: replacement) if value.is_a?(::Hash)
-          return value.map { |v| filter_value(key, value, keys_to_filter, replacement: replacement) } if value.is_a?(::Enumerable)
+          return value.map { |v| filter_value(key, keys_to_filter, replacement: replacement) } if value.is_a?(::Enumerable)
           return replacement if should_filter_value?(key, keys_to_filter)
           value
         end
@@ -58,6 +65,16 @@ module Footing
           end
           self.delete key
           self[new_key] = value
+        end
+
+        def update_value_for(key, &block)
+          value = self[key]
+          case value
+          when ::Hash then new_value = value.update_values!(&block)
+          when ::Enumerable then new_value = value.map { |v| v.is_a?(::Hash) ? v.update_values!(&block) : v }
+          else new_value = block.call(value)
+          end
+          self[key] = new_value
         end
     end
   end
